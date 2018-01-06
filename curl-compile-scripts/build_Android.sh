@@ -131,6 +131,10 @@ for p in ${PLATFORMS[*]}; do
   fi
 done
 
+#Copying openssl headers
+mkdir -p $DESTDIR/include/openssl
+cp -L $SSLPATH/include/openssl/* $DESTDIR/include/openssl
+
 #Copying cURL headers
 cp -R $CURLPATH/include $DESTDIR/
 rm $DESTDIR/include/curl/.gitignore
