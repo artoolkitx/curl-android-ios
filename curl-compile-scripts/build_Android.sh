@@ -100,11 +100,10 @@ sed 's/#define CURL_SIZEOF_LONG 4/\
 #define CURL_SIZEOF_LONG 8\
 #else\
 #define CURL_SIZEOF_LONG 4\
-#endif \
+#endif\
 #if __LP64__\
 #define SIZEOF_SIZE_T 8\
-#error 'Hit'\
-#else
+#else\
 #define SIZEOF_SIZE_T 4\
 #endif/'< curlbuild.h > curlbuild.h.temp
 
