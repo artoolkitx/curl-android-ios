@@ -100,7 +100,21 @@ sed 's/#define CURL_SIZEOF_LONG 4/\
 #define CURL_SIZEOF_LONG 8\
 #else\
 #define CURL_SIZEOF_LONG 4\
+#endif\
+#if __LP64__\
+#define SIZEOF_SIZE_T 8\
+#else\
+#define SIZEOF_SIZE_T 4\
 #endif/'< curlbuild.h > curlbuild.h.temp
+
+#Patch SIZEOF_SIZE_T for 64-bit arch
+# echo "#if defined(ARCH_arm64_v8a) || defined(ARCH_x86_64)" >> curlbuild.h.temp
+# echo "#define SIZEOF_SIZE_T 8" >> curlbuild.h.temp
+# echo "#elif defined(ARCH_armeabi_v7a) || defined(ARCH_x86)" >> curlbuild.h.temp
+# echo "#define SIZEOF_SIZE_T 4" >> curlbuild.h.temp
+# echo "#else" >> curlbuild.h.temp
+# echo "#error 'Can not detect 32/64 architecture: ARCH_<architecture> not defined.'" >> curlbuild.h.temp
+# echo "#endif" >> curlbuild.h.temp
 
 mv curlbuild.h.temp curlbuild.h
 
