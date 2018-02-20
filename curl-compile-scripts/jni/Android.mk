@@ -9,6 +9,8 @@ include $(LOCAL_PATH)/crypto.mk
 #cURL
 include $(LOCAL_PATH)/curl.mk
 
+GLOBAL_CFLAGS += -DARCH_$(subst -,_,$(TARGET_ARCH_ABI))
+
 #Static libssl
 include $(CLEAR_VARS)
 LOCAL_MODULE := ssl
